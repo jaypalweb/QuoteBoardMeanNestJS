@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Quote } from './interfaces/quote.interface';
 
 @Injectable()
 export class QuotesService {
@@ -6,7 +7,7 @@ export class QuotesService {
         return 'This will return all the quotes';
     }
 
-    createQuotes(quote: any): string {
-        return `${quote.author} has written "${quote.title}"`;
+    createQuotes(quote: Quote) {
+        return quote;
     }
 }
