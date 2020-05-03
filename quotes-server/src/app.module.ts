@@ -6,7 +6,7 @@ import { QuotesService } from './quotes/quotes.service';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/quotes')],
+  imports: [MongooseModule.forRoot(process.env.MONGO_URI)],
   controllers: [AppController, QuotesController],
   providers: [AppService, QuotesService],
 })
