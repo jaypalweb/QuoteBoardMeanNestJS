@@ -9,45 +9,24 @@ export class QuotesService {
         @InjectModel('Quote') private readonly quoteModel: Model<Quote>
     ) { }
 
-    quotes: Quote[] = [
-        {
-            id: '1',
-            title: 'my first quote',
-            author: 'Jay First'
-        },
-        {
-            id: '2',
-            title: 'my second quote',
-            author: 'Jay Second'
-        },
-        {
-            id: '3',
-            title: 'my third quote',
-            author: 'Jay Third'
-        }
-    ];
-
-    getQuotes(): Quote[] {
-        return this.quoteModel.find().exec();
+    async getQuotes(): Promise<Quote[]> {
+        return await this.quoteModel.find().exec();
     }
 
-    getQuote(id: string): Quote {
-        return this.quotes.find(quote => quote.id === id);
+    async getQuote(id: string): Promise<Quote> {
+        return await this.quoteModel.findById(id).exec();
     }
 
-    createQuotes(quote: Quote): Promise<Quote> {
+    async createQuotes(quote: Quote): Promise<Quote> {
         const newQuote = new this.quoteModel(quote);
-        return newQuote.save();
+        return await newQuote.save();
     }
 
-    updateQuote(id: string, updateQuoteDto): Quote {
-        const data = this.quotes.find(quote => quote.id === id);
-        data.title = updateQuoteDto.title ? updateQuoteDto.title : data.title;
-        data.author = updateQuoteDto.author ? updateQuoteDto.author : data.author;
-        return data;
+    async updateQuote(id: string, updateQuoteDto): Promise<Quote> {
+        return await this.quoteModel.findByIdAndUpdate(id, updateQuoteDto, { new: true });
     }
 
-    deleteQuote(id: string): Quote {
-        return this.quotes.find(quote => quote.id === id);
+    async deleteQuote(id: string): Promise<any> {
+        return this.quoteModel.findByIdAndRemove(id);
     }
 }

@@ -12,15 +12,13 @@ export class QuotesController {
     constructor(private quotesService: QuotesService) { }
 
     @Get()
-    getQuotes(): Quote[] {
+    getQuotes(): Promise<Quote[]> {
         return this.quotesService.getQuotes();
     }
 
-    //ref- https://github.com/swagger-api/swagger-core/wiki/Annotations
-
     @ApiParam({ name: 'id' }) //for swagger
     @Get(':id')
-    getQuote(@Param('id') id): Quote {
+    getQuote(@Param('id') id): Promise<Quote> {
         return this.quotesService.getQuote(id);
     }
 
@@ -31,13 +29,13 @@ export class QuotesController {
 
     @ApiParam({ name: 'id' })
     @Put(':id')
-    updateQutes(@Param('id') id, @Body() updateQutesDto: CreateQuoteDto): Quote {
+    updateQutes(@Param('id') id, @Body() updateQutesDto: CreateQuoteDto): Promise<Quote> {
         return this.quotesService.updateQuote(id, updateQutesDto);
     }
 
     @ApiParam({ name: 'id' })
     @Delete(':id')
-    deleteQuote(@Param('id') id): Quote {
+    deleteQuote(@Param('id') id): Promise<any> {
         return this.quotesService.deleteQuote(id);
     }
 }
