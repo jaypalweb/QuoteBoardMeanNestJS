@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Logger } from '@nestjs/common';
 import { QuotesService } from './quotes.service';
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { Quote } from './interfaces/quote.interface';
@@ -13,12 +13,14 @@ export class QuotesController {
 
     @Get()
     getQuotes(): Promise<Quote[]> {
+        Logger.log('Get All APIs');
         return this.quotesService.getQuotes();
     }
 
     @ApiParam({ name: 'id' }) //for swagger
     @Get(':id')
     getQuote(@Param('id') id): Promise<Quote> {
+        Logger.log('Get an API');
         return this.quotesService.getQuote(id);
     }
 
