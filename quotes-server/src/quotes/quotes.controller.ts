@@ -18,18 +18,14 @@ export class QuotesController {
 
     //ref- https://github.com/swagger-api/swagger-core/wiki/Annotations
 
-    @ApiParam({ name: 'id' }) //localhost:3000/quotes/3
+    @ApiParam({ name: 'id' }) //for swagger
     @Get(':id')
-    //One way
-    // getQuote(@Param() param) {
-    //     return `${param.id}`;
-    // }
     getQuote(@Param('id') id): Quote {
         return this.quotesService.getQuote(id);
     }
 
     @Post()
-    createQuote(@Body() createQuoteDto: CreateQuoteDto): Quote {
+    createQuote(@Body() createQuoteDto: CreateQuoteDto): Promise<Quote> {
         return this.quotesService.createQuotes(createQuoteDto);
     }
 
