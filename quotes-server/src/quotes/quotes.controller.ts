@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, HttpException, HttpStatus } from '@nestjs/common';
 import { QuotesService } from './quotes.service';
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { Quote } from './interfaces/quote.interface';
@@ -23,8 +23,12 @@ export class QuotesController {
     }
 
     @Post()
-    createQuote(@Body() createQuoteDto: CreateQuoteDto): Promise<Quote> {
-        return this.quotesService.createQuotes(createQuoteDto);
+    async createQuote(@Body() createQuoteDto: CreateQuoteDto): Promise<Quote> {
+        try {
+            return await this.quotesService.createQuotes(createQuoteDto);
+        } catch (err) {
+            throw new HttpException(err.message, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
     }
 
     @ApiParam({ name: 'id' })
