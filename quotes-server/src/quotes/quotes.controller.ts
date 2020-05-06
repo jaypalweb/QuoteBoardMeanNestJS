@@ -3,7 +3,6 @@ import { QuotesService } from './quotes.service';
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { Quote } from './interfaces/quote.interface';
 import { ApiTags, ApiParam } from '@nestjs/swagger';
-import { identity } from 'rxjs';
 
 @ApiTags('quotes')
 
