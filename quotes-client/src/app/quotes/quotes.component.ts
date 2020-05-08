@@ -7,12 +7,13 @@ import { QuotesService } from '../quotes.service';
   styleUrls: ['./quotes.component.scss']
 })
 export class QuotesComponent implements OnInit {
-
+  quotes;
   constructor(private quotesService: QuotesService) { }
 
   ngOnInit(): void {
     this.quotesService.getData().subscribe((data) => {
-      console.log(data);
+      //console.log(data);
+      this.quotes = data;
     })
   }
 
