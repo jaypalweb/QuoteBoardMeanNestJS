@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuotesService } from '../quotes.service';
 
 @Component({
   selector: 'app-quotes',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuotesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private quotesService: QuotesService) { }
 
   ngOnInit(): void {
+    this.quotesService.getData().subscribe((data) => {
+      console.log(data);
+    })
   }
 
   getRandomColor() {
