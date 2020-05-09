@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuotesService } from '../quotes.service';
 
 @Component({
   selector: 'app-edit-quote',
@@ -10,13 +11,17 @@ export class EditQuoteComponent implements OnInit {
     title: '',
     author: ''
   }
-  constructor() { }
+  constructor(private quotesService: QuotesService) { }
 
   ngOnInit(): void {
   }
 
   onSave(form) {
-    console.log(form);
+    const data = form.value;
+    this.quotesService.createQuote(data).subscribe(data => {
+      console.log(data);
+    });
+    //console.log(form);
   }
 
 }

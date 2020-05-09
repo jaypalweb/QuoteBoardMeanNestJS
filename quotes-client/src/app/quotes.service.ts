@@ -19,8 +19,11 @@ export class QuotesService {
       .pipe(tap(data => console.log('Quotes:', data)));
   }
 
-  getQuote(id): Observable<Quote> {
+  getQuote(id: string): Observable<Quote> {
     return this.http.get<Quote>(`${baseUrl}/quotes/${id}`)
       .pipe(tap(data => console.log('Quote:', data)));
+  }
+  createQuote(quote: Quote): Observable<Quote> {
+    return this.http.post<Quote>(`${baseUrl}/quotes`, quote);
   }
 }
