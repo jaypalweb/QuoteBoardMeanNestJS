@@ -1,9 +1,16 @@
 <form #form="ngForm" (submit)="onSave(form)" class="quote-form">
     <mat-form-field>
-        <textarea name="title" matInput placeholder="Enter Quote" [(ngModel)]="quote.title"></textarea>
+        <textarea name="title" matInput placeholder="Enter Quote" [(ngModel)]="quote.title" required
+            #title="ngModel"></textarea>
+        <mat-error *ngIf="title.invalid && (title.touched || title.dirty)">
+            Please enter quote
+        </mat-error>
     </mat-form-field>
     <mat-form-field>
-        <input name="author" matInput placeholder="Enter Author" [(ngModel)]="quote.author">
+        <input name="author" matInput placeholder="Enter Author" [(ngModel)]="quote.author" required #author="ngModel">
+        <mat-error *ngIf="author.invalid && (author.touched || author.dirty)">
+            Please enter author
+        </mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">Save</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Save</button>
 </form>
