@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-quote.component.scss']
 })
 export class EditQuoteComponent implements OnInit {
-
+  quote = {
+    title: '',
+    author: ''
+  }
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSave(form) {
+    console.log(form);
   }
 
 }
