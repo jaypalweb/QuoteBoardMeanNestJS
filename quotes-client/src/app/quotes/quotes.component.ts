@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuotesService } from '../quotes.service';
 import { Observable } from 'rxjs';
 import { Quote } from './quote';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-quotes',
@@ -11,7 +12,7 @@ import { Quote } from './quote';
 export class QuotesComponent implements OnInit {
   quotes: Observable<Quote[]>;
 
-  constructor(private quotesService: QuotesService) { }
+  constructor(private quotesService: QuotesService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getData();
@@ -34,6 +35,7 @@ export class QuotesComponent implements OnInit {
     console.log(id);
     this.quotesService.deleteQuote(id).subscribe(data => {
       this.getData();
+      this.snackBar.open('Quote Deleted');
       console.log('Quote Deleted');
     });
   }
