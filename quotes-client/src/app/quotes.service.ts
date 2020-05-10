@@ -32,4 +32,8 @@ export class QuotesService {
     return this.http.put<Quote>(`${baseUrl}/quotes/${id}`, quote)
       .pipe(tap(data => console.log('Quote:', data)));
   }
+
+  deleteQuote(id: String) {
+    return this.http.delete(`${baseUrl}/quotes/${id}`);
+  }
 }

@@ -14,10 +14,10 @@ export class QuotesComponent implements OnInit {
   constructor(private quotesService: QuotesService) { }
 
   ngOnInit(): void {
-    // this.subscription = this.quotesService.getData().subscribe((data) => {
-    //   //console.log(data);
-    //   this.quotes = data;
-    // })
+    this.getData();
+  }
+
+  getData() {
     this.quotes = this.quotesService.getData();
   }
 
@@ -28,5 +28,13 @@ export class QuotesComponent implements OnInit {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return { background: color };
+  }
+
+  onDelete(id: string) {
+    console.log(id);
+    this.quotesService.deleteQuote(id).subscribe(data => {
+      this.getData();
+      console.log('Quote Deleted');
+    });
   }
 }
